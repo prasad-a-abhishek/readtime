@@ -5,7 +5,7 @@
 ## Install
 
 ```sh
-npm install readtime
+npm install github:prasad-a-abhishek/readtime
 ```
 
 ## Quick start
@@ -18,7 +18,7 @@ console.log(readtime.minutes(text));
 console.log(readtime.human(text));
 ```
 
-ES modules are supported: `import readtime from 'readtime'`.
+CommonJS only — `import` syntax requires you to add an ESM wrapper yourself.
 
 ## API
 
