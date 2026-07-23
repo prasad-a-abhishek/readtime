@@ -1,0 +1,12 @@
+{
+  "name": "readtime",
+  "version": "1.0.0",
+  "description": "Tiny zero-dependency reading-time estimator",
+  "main": "index.js",
+  "type": "commonjs",
+  "exports": { ".": { "require": "./index.js", "import": "./index.mjs" } },
+  "bin": { "readtime": "bin/readtime.js" },
+  "scripts": { "test": "node --test" },
+  "engines": { "node": ">=18" },
+  "license": "MIT"
+}
