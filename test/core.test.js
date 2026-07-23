@@ -68,6 +68,24 @@ test('words() returns 0 for punctuation-only', () => {
   assert.equal(rt.stats('...!!!???').words, 0);
 });
 
+test('words() returns 0 for control characters only', () => {
+  // QA #1: control chars (Cc category) should not count as words.
+  assert.equal(rt.stats('\x01\x02').words, 0);
+  assert.equal(rt.stats('\x00').words, 0);
+});
+
+test('words() returns 0 for emoji-only', () => {
+  // QA #2: emoji and symbols are punctuation/symbols (Sc, So), not
+  // word content under our policy.
+  assert.equal(rt.stats('😀👍🏽').words, 0);
+  assert.equal(rt.stats('🎉🎊').words, 0);
+});
+
+test('words() handles emoji as separators between real words', () => {
+  // Emoji should break word continuity, not be counted.
+  assert.equal(rt.stats('hello 😀 world').words, 2);
+});
+
 test('words() handles mixed scripts', () => {
   // English + CJK: 2 English words + 4 CJK ideographs = 6
   assert.equal(rt.stats('hello 你好 world 世界').words, 6);
@@ -83,6 +101,21 @@ test('chars() counts all chars when countChars=all', () => {
 
 test('sentences() splits on . ! ?', () => {
   assert.equal(rt.stats('First. Second! Third?').sentences, 3);
+});
+
+test('sentences() handles abbreviations like Mr. Dr. e.g.', () => {
+  // QA #3: abbreviations should NOT introduce extra sentence boundaries.
+  // "Mr. Smith. Dr. Jones. e.g. example. Hi!" has 4 actual boundaries:
+  // Smith., Jones., example., Hi!
+  const s = rt.stats('Mr. Smith. Dr. Jones. e.g. example. Hi!').sentences;
+  assert.equal(s, 4, `expected 4 sentences, got ${s}`);
+});
+
+test('sentences() treats e.g. followed by lowercase as continuation', () => {
+  // "I like fruits e.g. apples and oranges. They taste good." → 2 sentences
+  // The "e.g." doesn't end a sentence because it continues with lowercase.
+  const s = rt.stats('I like fruits e.g. apples and oranges. They taste good.').sentences;
+  assert.equal(s, 2, `expected 2 sentences, got ${s}`);
 });
 
 test('paragraphs() splits on blank lines', () => {
@@ -251,6 +284,12 @@ test('throws RangeError for wordsPerMinute <= 0', () => {
 
 test('throws RangeError for invalid format', () => {
   assert.throws(() => rt.human('a', { format: 'bogus' }), RangeError);
+});
+
+test('human() rejects json format (use stats() or CLI --json)', () => {
+  // QA #5: human() is for human-readable text. JSON output is the
+  // responsibility of stats() or the CLI's --json flag.
+  assert.throws(() => rt.human('hello', { format: 'json' }), RangeError);
 });
 
 // ---------------------------------------------------------------------
