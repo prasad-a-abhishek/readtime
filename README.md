@@ -2,6 +2,18 @@
 
 `readtime` is a tiny, zero-dependency Node.js reading-time estimator for plain text, Markdown, and HTML. It provides seconds, rounded minutes, human labels, detailed statistics, streaming, and a practical CLI while keeping its core below 5 KB.
 
+## ⚡ Performance & Benchmarks
+
+`@prasadaabhishek/readtime` calculates reading time for articles and guides 6.5x faster than alternatives.
+
+| Article Length | `@prasadaabhishek/readtime` | `reading-time` | Speed Advantage |
+| :--- | :---: | :---: | :---: |
+| **Short Post (300 words)** | ⚡ **0.012 ms** | 0.085 ms | **7.0x Faster** |
+| **Medium Article (1,500 words)** | ⚡ **0.045 ms** | 0.290 ms | **6.4x Faster** |
+| **Long Guide (10,000 words)** | ⚡ **0.280 ms** | 1.850 ms | **6.6x Faster** |
+
+> **Replicate these results:** Run `node benchmarks/run_benchmark.js` directly inside this repository.
+
 ## Install
 
 ```sh
@@ -86,16 +98,3 @@ For reproducible throughput comparisons, run both against the same corpus and No
 ## License
 
 MIT
-
-
-## ⚡ Performance & Benchmarks
-
-`@prasadaabhishek/readtime` calculates reading time for articles and guides 6.5x faster than alternatives.
-
-| Article Length | `@prasadaabhishek/readtime` | `reading-time` | Speed Advantage |
-| :--- | :---: | :---: | :---: |
-| **Short Post (300 words)** | ⚡ **0.012 ms** | 0.085 ms | **7.0x Faster** |
-| **Medium Article (1,500 words)** | ⚡ **0.045 ms** | 0.290 ms | **6.4x Faster** |
-| **Long Guide (10,000 words)** | ⚡ **0.280 ms** | 1.850 ms | **6.6x Faster** |
-
-> **Replicate these results:** Run `node benchmarks/run_benchmark.js` directly inside this repository.
