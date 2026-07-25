@@ -1,4 +1,4 @@
-# @prasadaabhishek/readtime
+# readtime
 
 [![npm version](https://img.shields.io/npm/v/@prasadaabhishek/readtime.svg)](https://www.npmjs.com/package/@prasadaabhishek/readtime)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -12,7 +12,7 @@ npm install @prasadaabhishek/readtime
 ```
 
 ```typescript
-import { getReadTime } from '@prasadaabhishek/readtime';
+const { getReadTime } = require('@prasadaabhishek/readtime');
 
 const stats = getReadTime(markdownText);
 console.log(`Read time: ${stats.humanizedDuration} (${stats.words} words)`);
@@ -20,9 +20,9 @@ console.log(`Read time: ${stats.humanizedDuration} (${stats.words} words)`);
 
 ## ⚡ Performance & Benchmarks
 
-`@prasadaabhishek/readtime` calculates article reading times 6.5x faster than standard packages.
+`readtime` calculates article reading times 6.5x faster than standard packages.
 
-| Article Length | `@prasadaabhishek/readtime` | `reading-time` | Speed Advantage |
+| Article Length | `readtime` | `reading-time` | Speed Advantage |
 | :--- | :---: | :---: | :---: |
 | **Short Post (300 words)** | ⚡ **0.012 ms** | 0.085 ms | **7.0x Faster** |
 | **Medium Article (1,500 words)** | ⚡ **0.045 ms** | 0.290 ms | **6.4x Faster** |
