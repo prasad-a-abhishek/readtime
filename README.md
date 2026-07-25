@@ -5,7 +5,7 @@
 ## Install
 
 ```sh
-npm install github:prasad-a-abhishek/readtime
+npm install @prasadaabhishek/readtime
 ```
 
 ## Quick start
